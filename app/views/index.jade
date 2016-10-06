@@ -2,6 +2,8 @@ doctype html
 html
     head
         title= 'bilibili up主历史视频播放量'
+        link(rel='stylesheet',href='//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        link(rel='stylesheet',href='//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css')
         link(rel='stylesheet',href='/index/index.css')
     body
         header.header-container
@@ -10,9 +12,9 @@ html
 
         form.form-horizontal.input-area.row(role='form')
             div.user1-area.form-group.col-sm-10
-                label.control-label.col-sm-3 up主id:
+                label.control-label.col-sm-3 up主uid:
                 div.col-sm-9
-                    input.upid-input.form-control(type=text,value=122879,placeholder='123345')
+                    input.upid-input.form-control(type=text,placeholder='请输入up主uid(不是昵称!)')
             div.col-sm-2
                 button.btn.btn-default.submit-bt(type='button') Start!
 
@@ -21,11 +23,11 @@ html
             br
             | 请稍等片刻~
         div.user-tips
-            h3 如何查看up主id?
+            h3 如何查看up主uid?
             ol
                 li 打开up主的b站个人主页
                 li 然后看到右边有一堆标签卡片,显示up主的充电人数,直播情况,还有简单个人信息啥的
-                li up主id即为下图这张卡片里的uid
+                li up主uid即为下图这张卡片里的uid
                     br
                     img(src='index/img/lanshao-pic.png')
 
@@ -79,4 +81,6 @@ html
                         div.average-length.col-sm-9
 
 
-        script(src='/index/bundle.js')
+        script(src='//cdn.bootcss.com/jquery/2.2.4/jquery.js')
+        script(src='//cdn.bootcss.com/echarts/3.2.3/echarts.min.js')
+        script(src='/index/getData.js')
