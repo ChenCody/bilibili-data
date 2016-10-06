@@ -1,0 +1,82 @@
+doctype html
+html
+    head
+        title= 'bilibili up主历史视频播放量'
+        link(rel='stylesheet',href='/index/index.css')
+    body
+        header.header-container
+            div.header-title
+                |bilibili up主视频观看数据查询
+
+        form.form-horizontal.input-area.row(role='form')
+            div.user1-area.form-group.col-sm-10
+                label.control-label.col-sm-3 up主id:
+                div.col-sm-9
+                    input.upid-input.form-control(type=text,value=122879,placeholder='123345')
+            div.col-sm-2
+                button.btn.btn-default.submit-bt(type='button') Start!
+
+        div.loading-info
+            | 正在获取信息
+            br
+            | 请稍等片刻~
+        div.user-tips
+            h3 如何查看up主id?
+            ol
+                li 打开up主的b站个人主页
+                li 然后看到右边有一堆标签卡片,显示up主的充电人数,直播情况,还有简单个人信息啥的
+                li up主id即为下图这张卡片里的uid
+                    br
+                    img(src='index/img/lanshao-pic.png')
+
+            h3 注意:
+            ol
+                li 查看up主id只能在网页端查看,不支持app端查看
+                li 由于数据统计的原因,只支持投稿数多于3个的up主投稿统计......(只投了一两个稿的也没法做统计啊喂!!)
+                li 由于服务器的原因,所以查询的时候有点慢,请耐心等待~
+        div.submit-result
+            div#echarts
+            div.data-wrapper
+                ul.data-list.list-group
+                    li.list-group-item.row
+                        div.col-sm-3 播放数top3:
+                        - var i = 0;
+                        ul.viewer-number-list.col-sm-9
+                            while i < 3
+                                - i++
+                                li.row
+                                    span.viewer-title.col-sm-6
+                                    span.viewer-count.col-sm-3
+                                    span.viewer-time.col-sm-3
+
+                    li.list-group-item.row
+                        div.col-sm-3 总投稿次数:
+                        div.total-post-count.col-sm-9
+                    li.list-group-item.row
+                        div.col-sm-3 平均投稿间隔:
+                        div.average-interval.col-sm-9
+                    li.list-group-item.row
+                        div.col-sm-3 最近一次投稿:
+                        div.latest-post-title.col-sm-6
+                        div.latest-post-time.col-sm-3.text-right
+                    li.list-group-item.row
+                        div.col-sm-3 距离最近一次投稿一共过了:
+                        div.latest-post-interval.col-sm-9
+                    li.list-group-item.row
+                        div.col-sm-3 所有视频总浏览次数:
+                        div.total-viewer.col-sm-9
+                    li.list-group-item.row
+                        div.col-sm-3 平均浏览量:
+                        div.average-viewer.col-sm-9
+                    li.list-group-item.row
+                        div.col-sm-3 超过平均浏览量的视频比率:
+                        div.above-viewer-rate.col-sm-9
+                    li.list-group-item.row
+                        div.col-sm-3 视频总时长:
+                        div.total-length.col-sm-9
+                    li.list-group-item.row
+                        div.col-sm-3 平均视频长度:
+                        div.average-length.col-sm-9
+
+
+        script(src='/index/bundle.js')
