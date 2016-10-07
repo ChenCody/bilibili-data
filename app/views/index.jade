@@ -18,6 +18,8 @@ html
             div.col-sm-2
                 button.btn.btn-default.submit-bt(type='button') Start!
 
+        div.error-popout
+            |错误!
         div.loading-info
             | 正在获取信息
             br
@@ -29,13 +31,18 @@ html
                 li 然后看到右边有一堆标签卡片,显示up主的充电人数,直播情况,还有简单个人信息啥的
                 li up主uid即为下图这张卡片里的uid
                     br
-                    img(src='index/img/lanshao-pic.png')
+                    div.img-box
+                        img(src='index/img/lanshao-pic.png')
 
             h3 注意:
             ol
                 li 查看up主id只能在网页端查看,不支持app端查看
+                li 由于服务器的原因,所以查询的时候可能有点慢,请耐心等待
+                li 如果长时间处于获取信息没有响应状态,请尝试刷新页面重新输入uid
                 li 由于数据统计的原因,只支持投稿数多于3个的up主投稿统计......(只投了一两个稿的也没法做统计啊喂!!)
-                li 由于服务器的原因,所以查询的时候有点慢,请耐心等待~
+                li 理论上来讲,单个视频播放量太小的(不超过1万)也没啥统计意义......
+                li 由于本网站使用的第三方数据接口,随时有爆炸的可能,所以如果长时间发现无法登陆,在确认不是自己网络爆炸(这一点很重要!)的情况下,请邮件至cq940506@gmail.com~
+
         div.submit-result
             div#echarts
             div.data-wrapper
@@ -80,6 +87,8 @@ html
                         div.col-sm-3 平均视频长度:
                         div.average-length.col-sm-9
 
+        footer.footer-container
+            |Data from www.bilibili.com&emsp;&emsp;Created by Cookie(chenqi)&emsp;&emsp;Mail:cq605719538@gmail.com
 
         script(src='//cdn.bootcss.com/jquery/2.2.4/jquery.js')
         script(src='//cdn.bootcss.com/echarts/3.2.3/echarts.min.js')

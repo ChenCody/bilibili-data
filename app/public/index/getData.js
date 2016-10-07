@@ -1,7 +1,7 @@
 /**
  * @author chenqi14
  */
-
+// TODO 小数点过长的异常(如:川大发 24919529)
 $('.submit-bt').on('click', function () {
     var val = $('.upid-input').val();
     if (val) {
@@ -31,9 +31,34 @@ function getUpData(upId, upId2) {
         )
         .then(function (d1, d2) {
             var data1 = d1[0];
-            var data2 = d2[0];
             var videoList1 = [];
-            var videoList2 = [];
+            $('.loading-info').fadeOut(100);
+
+            //判断是否有误
+            var errorPop = $('.error-popout');
+            if(!data1.vlist) {
+                // 取消禁用图标
+                errorPop.html('输入的uid可能有误哦~').fadeIn(100);
+                setTimeout(function() {
+                    errorPop.fadeOut(100);
+                    $('.upid-input').val('');
+                    $('.submit-bt').removeAttr('disabled');
+                }, 2000);
+                return 'error';
+            }
+            if(data1.vlist.length < 4) {
+                // 取消禁用图标
+                errorPop.html('改up主投稿数量太少啦~').fadeIn(100);
+                setTimeout(function() {
+                    errorPop.fadeOut(100);
+                    $('.upid-input').val('');
+                    $('.submit-bt').removeAttr('disabled');
+                }, 2000);
+                return '投稿数量太少';
+            }
+
+            $('.submit-bt').removeAttr('disabled');
+
 
             data1.vlist.map(function (value) {
                 videoList1.push([new Date(value.created), (value.play / 10000).toFixed(2), value.aid, value.title]);
@@ -91,12 +116,10 @@ function getUpData(upId, upId2) {
             });
 
             // 显示结果
-            $('.loading-info').fadeOut(100);
             $('.user-tips').fadeOut(100, function() {
                 $('.submit-result').fadeIn(100);
             });
             // 取消禁用图标
-            $('.submit-bt').removeAttr('disabled');
         });
 
 }
@@ -128,7 +151,6 @@ function dataResolve(data) {
 
     }
 
-    console.log(analysisResult);
 }
 
 /*

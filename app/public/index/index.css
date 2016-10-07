@@ -18,10 +18,11 @@
 
 .input-area {
   width: 600px;
-  margin: 20px auto 10px;
+  margin: 40px auto 10px;
 }
 
-.loading-info {
+.loading-info,
+.error-popout {
   display: none;
   position: fixed;
   top: 120px;
@@ -40,10 +41,18 @@
   width: 640px;
   margin: 40px auto 20px;
   padding: 20px;
+  font-size: 14px;
   border-radius: 4px;
   box-shadow: 0 0 8px #aaa;
+  line-height: 1.7;
 }
-.user-tips img {
+.user-tips li {
+  margin-top: 6px;
+}
+.img-box {
+  height:170px;
+}
+.img-box img {
   width: 340px;
   height: auto;
   margin-top: 10px;
@@ -63,4 +72,12 @@
 
 .viewer-number-list {
   list-style: none;
+}
+
+.footer-container {
+  width: 100%;
+  margin-top: 50px;
+  font-size: 14px;
+  color: #aaa;
+  text-align: center;
 }
