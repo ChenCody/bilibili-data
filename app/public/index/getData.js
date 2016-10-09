@@ -38,7 +38,7 @@ function getUpData(upId, upId2) {
             var errorPop = $('.error-popout');
             if(!data1.vlist) {
                 // 取消禁用图标
-                errorPop.html('输入的uid可能有误哦~').fadeIn(100);
+                errorPop.html('输入的uid可能有误<br/>或者该UP主无投稿视频~').fadeIn(100);
                 setTimeout(function() {
                     errorPop.fadeOut(100);
                     $('.upid-input').val('');
@@ -61,7 +61,7 @@ function getUpData(upId, upId2) {
 
 
             data1.vlist.map(function (value) {
-                videoList1.push([new Date(value.created), (value.play / 10000).toFixed(2), value.aid, value.title]);
+                videoList1.push([new Date(value.created.replace(/ /g,'T')), (value.play / 10000).toFixed(2), value.aid, value.title]);
             });
 
             dataResolve(data1.vlist);
@@ -131,7 +131,7 @@ function dataResolve(data) {
     $('.latest-post-interval').html(analysisResult.latestInterval);
     $('.total-viewer').html(analysisResult.totalViewer + ' 次');
     $('.average-viewer').html(analysisResult.averageViewer + ' 次/视频');
-    $('.above-viewer-rate').html(analysisResult.aboveAverageRate * 100 + '%');
+    $('.above-viewer-rate').html(((+analysisResult.aboveAverageRate) * 100).toFixed(1) + '%');
     $('.total-length').html(analysisResult.totalLength + ' 分钟');
     $('.average-length').html(analysisResult.averageLength + ' 分钟');
 
@@ -163,8 +163,8 @@ function dataAnalyse(data) {
     var postAmount = data.length;
     var startTime = data[data.length - 1].created;
     var latestTime = data[0].created;
-    var totalDurationMilSec = ((new Date(latestTime)).getTime() - (new Date(startTime)).getTime());  // 总投稿时间
-    var latestInterval = timeFormat((new Date()).getTime() - (new Date(latestTime)).getTime());
+    var totalDurationMilSec = ((new Date(latestTime.replace(/ /g,'T'))).getTime() - (new Date(startTime.replace(/ /g,'T'))).getTime());  // 总投稿时间
+    var latestInterval = timeFormat((new Date()).getTime() - (new Date(latestTime.replace(/ /g,'T'))).getTime());
 
     data.map(function (value, index) {
         // 总浏览量

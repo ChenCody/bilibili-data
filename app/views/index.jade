@@ -42,6 +42,7 @@ html
                 li 由于数据统计的原因,只支持投稿数多于3个的up主投稿统计......(只投了一两个稿的也没法做统计啊喂!!)
                 li 理论上来讲,单个视频播放量太小的(不超过1万)也没啥统计意义......
                 li 由于本网站使用的第三方数据接口,随时有爆炸的可能,所以如果长时间发现无法登陆,在确认不是自己网络爆炸(这一点很重要!)的情况下,请邮件至cq940506@gmail.com~
+                li 由于图表的问题,如果up主在某一天内投稿多个视频,会导致折线图显示上的小bug,正在解决中......
 
         div.submit-result
             div#echarts
@@ -80,15 +81,15 @@ html
                     li.list-group-item.row
                         div.col-sm-3 超过平均浏览量的视频比率:
                         div.above-viewer-rate.col-sm-9
-                    li.list-group-item.row
+                    li.list-group-item.row.hidden
                         div.col-sm-3 视频总时长:
                         div.total-length.col-sm-9
-                    li.list-group-item.row
+                    li.list-group-item.row.hidden
                         div.col-sm-3 平均视频长度:
                         div.average-length.col-sm-9
 
         footer.footer-container
-            |Data from www.bilibili.com&emsp;&emsp;Created by Cookie(chenqi)&emsp;&emsp;Mail:cq605719538@gmail.com
+            |Data from www.bilibili.com&emsp;&emsp;Created by Cookie
 
         script(src='//cdn.bootcss.com/jquery/2.2.4/jquery.js')
         script(src='//cdn.bootcss.com/echarts/3.2.3/echarts.min.js')

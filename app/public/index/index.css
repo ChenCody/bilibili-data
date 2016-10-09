@@ -37,6 +37,9 @@
   text-align: center;
   z-index: 9;
 }
+.error-popout {
+  width: 200px;
+}
 .user-tips {
   width: 640px;
   margin: 40px auto 20px;

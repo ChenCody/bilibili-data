@@ -13,5 +13,8 @@
     "echarts": "^3.2.3",
     "express": "^4.14.0",
     "jquery": "^3.1.1"
+  },
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^1.0.1"
   }
 }

@@ -2,12 +2,7 @@
  * @author chenqi14
  */
 
-var $ = require('jquery');
-var echarts = require('echarts');
-require('echarts/lib/chart/line');
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-
+// TODO 小数点过长的异常
 $('.submit-bt').on('click', function () {
     var val = $('.upid-input').val();
     if (val) {
@@ -37,9 +32,34 @@ function getUpData(upId, upId2) {
         )
         .then(function (d1, d2) {
             var data1 = d1[0];
-            var data2 = d2[0];
             var videoList1 = [];
-            var videoList2 = [];
+            $('.loading-info').fadeOut(100);
+
+            //判断是否有误
+            var errorPop = $('.error-popout');
+            if(!data1.vlist) {
+                // 取消禁用图标
+                errorPop.html('输入的uid可能有误哦~').fadeIn(100);
+                setTimeout(function() {
+                    errorPop.fadeOut(100);
+                    $('.upid-input').val('');
+                    $('.submit-bt').removeAttr('disabled');
+                }, 2000);
+                return 'error';
+            }
+            if(data1.vlist.length < 4) {
+                // 取消禁用图标
+                errorPop.html('改up主投稿数量太少啦~').fadeIn(100);
+                setTimeout(function() {
+                    errorPop.fadeOut(100);
+                    $('.upid-input').val('');
+                    $('.submit-bt').removeAttr('disabled');
+                }, 2000);
+                return '投稿数量太少';
+            }
+
+            $('.submit-bt').removeAttr('disabled');
+
 
             data1.vlist.map(function (value) {
                 videoList1.push([new Date(value.created), (value.play / 10000).toFixed(2), value.aid, value.title]);
@@ -97,12 +117,10 @@ function getUpData(upId, upId2) {
             });
 
             // 显示结果
-            $('.loading-info').fadeOut(100);
             $('.user-tips').fadeOut(100, function() {
                 $('.submit-result').fadeIn(100);
             });
             // 取消禁用图标
-            $('.submit-bt').removeAttr('disabled');
         });
 
 }
@@ -114,7 +132,7 @@ function dataResolve(data) {
     $('.latest-post-interval').html(analysisResult.latestInterval);
     $('.total-viewer').html(analysisResult.totalViewer + ' 次');
     $('.average-viewer').html(analysisResult.averageViewer + ' 次/视频');
-    $('.above-viewer-rate').html(analysisResult.aboveAverageRate * 100 + '%');
+    $('.above-viewer-rate').html(((+analysisResult.aboveAverageRate) * 100).toFixed(1) + '%');
     $('.total-length').html(analysisResult.totalLength + ' 分钟');
     $('.average-length').html(analysisResult.averageLength + ' 分钟');
 
@@ -134,7 +152,6 @@ function dataResolve(data) {
 
     }
 
-    console.log(analysisResult);
 }
 
 /*
@@ -235,8 +252,8 @@ function parseTime(timeStr) {
 }
 
 /**
-* 时间格式化
-*/
+ * 时间格式化
+ */
 Date.prototype.Format = function (fmt) {
     var o = {
         "M+": this.getMonth() + 1, //月份
@@ -254,16 +271,16 @@ Date.prototype.Format = function (fmt) {
 };
 
 /**
-* 数字格式化
-*/
+ * 数字格式化
+ */
 Number.prototype.format = Number.prototype.format || function() {
-    nStr = this + '';
-    x = nStr.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{4})/;
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-    return x1 + x2;
-};
+        nStr = this + '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{4})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    };
